@@ -1,7 +1,7 @@
 # PostgreSQL — źródło prawdy (database-per-service)
 
 Standardowy obraz `postgres`, ale to repo trzyma jego konfigurację inicjującą.
-`docker-compose.yml` (w repo shop-documentation) montuje stąd skrypt zakładający
+`docker-compose.yml` (w repo shop-infra) montuje stąd skrypt zakładający
 bazy. Każdy serwis ma **własną bazę** i nikt nie zagląda do cudzej — luźne
 sprzężenie i niezależne wdrożenia. W demie jeden silnik z wieloma bazami;
 produkcyjnie osobne instancje.
@@ -10,7 +10,7 @@ produkcyjnie osobne instancje.
 
 - Bazy tworzy `01-create-databases.sql` (w korzeniu tego repo) przy pierwszym
   starcie — compose montuje go do `/docker-entrypoint-initdb.d/`:
-  `catalog_db` (shop-catalog), `inventory_db` (shop-inwentory), `order_db`
+  `catalog_db` (shop-catalog), `inventory_db` (shop-inventory), `order_db`
   (shop-order), `payment_db` (shop-payment), `notification_db` (shop-notification).
 - Poświadczenia w demie: `appuser` / `apppass`. **Produkcyjnie sekrety**, osobni
   użytkownicy per baza i TLS.
@@ -22,7 +22,7 @@ wersjonowanymi w repo danego serwisu, nie tworzonymi ręcznie.
 
 ## Schematy (zarys, szczegóły w README serwisów)
 
-- **inventory_db** (shop-inwentory): `products(id, name, total_stock, version)` z
+- **inventory_db** (shop-inventory): `products(id, name, total_stock, version)` z
   blokadą optymistyczną; `reservations`; `outbox`; `processed_events`.
 - **order_db** (shop-order): `orders(..., idempotency_key UNIQUE)`; `order_items`;
   `saga_state`; `outbox`; `processed_events`.

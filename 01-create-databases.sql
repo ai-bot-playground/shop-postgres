@@ -3,7 +3,7 @@
 -- database-per-service: każdy serwis dostaje własną, izolowaną bazę.
 
 CREATE DATABASE catalog_db;       -- shop-catalog
-CREATE DATABASE inventory_db;     -- shop-inwentory
+CREATE DATABASE inventory_db;     -- shop-inventory
 CREATE DATABASE order_db;         -- shop-order
 CREATE DATABASE payment_db;       -- shop-payment
 CREATE DATABASE notification_db;  -- shop-notification
